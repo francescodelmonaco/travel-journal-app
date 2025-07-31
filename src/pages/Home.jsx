@@ -13,54 +13,50 @@ export default function Home() {
 
     return (
         <>
-            <main className="w-4/5 mx-auto flex flex-col gap-5">
-                <h1 className="text-4xl text-center font-bold pt-5">Travel Journal</h1>
-
-                <button
-                    className="bg-black text-white py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer self-end"
-                    onClick={() => setIsOpen(prev => !prev)}
-                >
-                    {
-                        isOpen && (
-                            <i className="fa-solid fa-xmark"></i>
-                        ) || (
-                            <i className="fa-solid fa-plus"></i>
-                        )
-                    }
-                </button>
-
+            <button
+                className="bg-black text-white py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer self-end"
+                onClick={() => setIsOpen(prev => !prev)}
+            >
                 {
                     isOpen && (
-                        <Form />
+                        <i className="fa-solid fa-xmark"></i>
+                    ) || (
+                        <i className="fa-solid fa-plus"></i>
                     )
                 }
+            </button>
 
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
-                    {
-                        posts.map((post, index) => {
-                            const { id, event, location, date, description, cost } = post;
+            {
+                isOpen && (
+                    <Form />
+                )
+            }
 
-                            // from yyyy-mm-dd to dd-mm-yyyy
-                            const newDate = date.split("-").reverse().join("-");
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
+                {
+                    posts.map((post, index) => {
+                        const { id, event, location, date } = post;
 
-                            return (
-                                <div key={index} className="border border-black rounded p-3">
-                                    <Link to={`/${id}`} className="flex flex-col gap-2">
-                                        <img
-                                            src="https://hips.hearstapps.com/hmg-prod/images/logan-armstrong-hvhfqhdyciu-unsplash-1-1606122043.jpg?crop=0.66640625xw:1xh;center,top&resize=640:*"
-                                            alt={`Foto ${event}`}
-                                            className="rounded relative"
-                                        />
-                                        <h3 className="font-bold text-xl">{event}</h3>
-                                        <p>📍 {location}</p>
-                                        <p className="absolute self-end mt-2 me-2 bg-white p-1.5 rounded shadow">{newDate}</p>
-                                    </Link>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            </main>
+                        // from yyyy-mm-dd to dd-mm-yyyy
+                        const newDate = date.split("-").reverse().join("/");
+
+                        return (
+                            <div key={index} className="border border-black rounded p-3 shadow">
+                                <Link to={`/${id}`} className="flex flex-col gap-2">
+                                    <img
+                                        src="https://hips.hearstapps.com/hmg-prod/images/logan-armstrong-hvhfqhdyciu-unsplash-1-1606122043.jpg?crop=0.66640625xw:1xh;center,top&resize=640:*"
+                                        alt={`Foto ${event}`}
+                                        className="rounded relative"
+                                    />
+                                    <h3 className="font-bold text-xl">{event}</h3>
+                                    <p>📍 {location}</p>
+                                    <p className="absolute self-end mt-2 me-2 bg-white py-1.5 px-3 rounded-full shadow">{newDate}</p>
+                                </Link>
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </>
     )
 }

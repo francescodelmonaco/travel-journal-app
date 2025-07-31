@@ -46,7 +46,7 @@ export default function Form() {
                 className="border w-full rounded py-1.5 px-2 shadow"
                 type="number"
                 step={0.01}
-                placeholder="Costo"
+                placeholder="Prezzo"
                 name="cost"
                 value={post.cost}
                 onChange={handleChange}
