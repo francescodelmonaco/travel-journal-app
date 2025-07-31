@@ -3,13 +3,9 @@ import { useGlobalContext } from "../contexts/GlobalContext"
 
 // components
 import Form from "../components/Form";
-import { useState } from "react";
 
 export default function Home() {
-    const { posts } = useGlobalContext();
-
-    // gestione apertura form
-    const [isOpen, setIsOpen] = useState(false);
+    const { posts, isOpen, setIsOpen } = useGlobalContext();
 
     return (
         <>

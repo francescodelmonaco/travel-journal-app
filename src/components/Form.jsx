@@ -8,7 +8,7 @@ export default function Form() {
             className="flex flex-col justify-between items-center gap-3 bg-gray-100 p-5 rounded shadow"
             onSubmit={createPost}>
             <input
-                className="border w-full rounded py-1.5 px-2 shadow"
+                className="border w-full rounded py-1.5 px-2 shadow bg-white"
                 type="text"
                 placeholder="Evento"
                 name="event"
@@ -17,7 +17,7 @@ export default function Form() {
             />
 
             <input
-                className="border w-full rounded py-1.5 px-2 shadow"
+                className="border w-full rounded py-1.5 px-2 shadow bg-white"
                 type="text"
                 placeholder="Località"
                 name="location"
@@ -26,7 +26,7 @@ export default function Form() {
             />
 
             <input
-                className="border w-full rounded py-1.5 px-2 shadow"
+                className="border w-full rounded py-1.5 px-2 shadow bg-white"
                 type="date"
                 name="date"
                 value={post.date}
@@ -34,7 +34,7 @@ export default function Form() {
             />
 
             <input
-                className="border w-full rounded py-1.5 px-2 shadow"
+                className="border w-full rounded py-1.5 px-2 shadow bg-white"
                 type="text"
                 placeholder="Descrizione"
                 name="description"
@@ -43,7 +43,7 @@ export default function Form() {
             />
 
             <input
-                className="border w-full rounded py-1.5 px-2 shadow"
+                className="border w-full rounded py-1.5 px-2 shadow bg-white"
                 type="number"
                 step={0.01}
                 placeholder="Prezzo"
@@ -52,7 +52,7 @@ export default function Form() {
                 onChange={handleChange}
             />
 
-            <button type="submit" className="bg-black text-white py-1.5 px-2 w-50 rounded shadow cursor-pointer">Aggiungi</button>
+            <button type="submit" className="bg-black text-white py-1.5 px-2 w-50 rounded-full shadow cursor-pointer">Aggiungi</button>
         </form>
     )
 }

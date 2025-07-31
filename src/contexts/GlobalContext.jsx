@@ -54,6 +54,11 @@ const GlobalProvider = ({ children }) => {
                 description: post.description,
                 cost: post.cost
             })
+
+        // chiudo form
+        setIsOpen(prev => !prev)
+
+        // svuoto form
         setPost({
             event: "",
             location: "",
@@ -61,6 +66,7 @@ const GlobalProvider = ({ children }) => {
             description: "",
             cost: ""
         })
+
         await fetchPosts()
 
         if (error) {
@@ -70,12 +76,32 @@ const GlobalProvider = ({ children }) => {
 
 
 
+    // gestione apertura form
+    const [isOpen, setIsOpen] = useState(false);
+
+
+
+    // eliminazione di un post
+    async function removePost(id) {
+        await supabase
+            .from("posts")
+            .delete()
+            .eq('id', id)
+
+        await fetchPosts()
+    };
+
+
+
     // destructuring
     const value = {
         posts,
         handleChange,
         post,
-        createPost
+        createPost,
+        isOpen,
+        setIsOpen,
+        removePost
     };
 
     return (
