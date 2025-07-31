@@ -22,9 +22,60 @@ const GlobalProvider = ({ children }) => {
 
     useEffect(() => { fetchPosts() }, []);
 
+
+
+    // creazione nuovo post
+    const [post, setPost] = useState({
+        event: "",
+        location: "",
+        date: "",
+        description: "",
+        cost: ""
+    });
+
+    const handleChange = e => {
+        setPost(prev => {
+            return {
+                ...prev,
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+
+    async function createPost(e) {
+        e.preventDefault();
+
+        const { error } = await supabase
+            .from("posts")
+            .insert({
+                event: post.event,
+                location: post.location,
+                date: post.date,
+                description: post.description,
+                cost: post.cost
+            })
+        setPost({
+            event: "",
+            location: "",
+            date: "",
+            description: "",
+            cost: ""
+        })
+        await fetchPosts()
+
+        if (error) {
+            console.error(error)
+        }
+    };
+
+
+
     // destructuring
     const value = {
-        posts
+        posts,
+        handleChange,
+        post,
+        createPost
     };
 
     return (
