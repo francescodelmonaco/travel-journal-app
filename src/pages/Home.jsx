@@ -1,78 +1,59 @@
 import { Link } from "react-router"
 import { useGlobalContext } from "../contexts/GlobalContext"
 
+// components
+import Form from "../components/Form";
+import { useState } from "react";
+
 export default function Home() {
-    const { posts, handleChange, post, createPost } = useGlobalContext();
+    const { posts } = useGlobalContext();
+
+    // gestione apertura form
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <>
-            <header>
-                <h1 className="text-4xl text-center font-bold py-5">Travel Journal</h1>
-            </header>
+            <main className="w-4/5 mx-auto flex flex-col gap-5">
+                <h1 className="text-4xl text-center font-bold pt-5">Travel Journal</h1>
 
-            <main className="w-4/5 mx-auto">
-                <form className="flex justify-between gap-3 my-5" onSubmit={createPost}>
-                    <input
-                        className="border w-full rounded py-1 px-2 shadow"
-                        type="text"
-                        placeholder="Evento"
-                        name="event"
-                        value={post.event}
-                        onChange={handleChange}
-                    />
+                <button
+                    className="bg-black text-white py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer self-end"
+                    onClick={() => setIsOpen(prev => !prev)}
+                >
+                    {
+                        isOpen && (
+                            <i className="fa-solid fa-xmark"></i>
+                        ) || (
+                            <i className="fa-solid fa-plus"></i>
+                        )
+                    }
+                </button>
 
-                    <input
-                        className="border w-full rounded py-1 px-2 shadow"
-                        type="text"
-                        placeholder="Località"
-                        name="location"
-                        value={post.location}
-                        onChange={handleChange}
-                    />
+                {
+                    isOpen && (
+                        <Form />
+                    )
+                }
 
-                    <input
-                        className="border w-full rounded py-1 px-2 shadow"
-                        type="date"
-                        name="date"
-                        value={post.date}
-                        onChange={handleChange}
-                    />
-
-                    <input
-                        className="border w-full rounded py-1 px-2 shadow"
-                        type="text"
-                        placeholder="Descrizione"
-                        name="description"
-                        value={post.description}
-                        onChange={handleChange}
-                    />
-
-                    <input
-                        className="border w-full rounded py-1 px-2 shadow"
-                        type="number"
-                        step={0.01}
-                        placeholder="Costo"
-                        name="cost"
-                        value={post.cost}
-                        onChange={handleChange}
-                    />
-
-                    <button type="submit" className="bg-black text-white py-1 px-2 w-full rounded shadow cursor-pointer">Aggiungi attività</button>
-                </form>
-
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
                     {
                         posts.map((post, index) => {
                             const { id, event, location, date, description, cost } = post;
 
+                            // from yyyy-mm-dd to dd-mm-yyyy
+                            const newDate = date.split("-").reverse().join("-");
+
                             return (
                                 <div key={index} className="border border-black rounded p-3">
-                                    <Link to={`/${id}`}>
-                                        <h3>{event}</h3>
-                                        <p>{location}</p>
-                                        <p>{date}</p>
-                                        <p>{description}</p>
-                                        <p>€ {cost}</p>
+                                    <Link to={`/${id}`} className="flex flex-col gap-2">
+                                        <img
+                                            src="https://hips.hearstapps.com/hmg-prod/images/logan-armstrong-hvhfqhdyciu-unsplash-1-1606122043.jpg?crop=0.66640625xw:1xh;center,top&resize=640:*"
+                                            alt={`Foto ${event}`}
+                                            className="rounded relative"
+                                        />
+                                        <h3 className="font-bold text-xl">{event}</h3>
+                                        <p>📍 {location}</p>
+                                        <p className="absolute self-end mt-2 me-2 bg-white p-1.5 rounded shadow">{newDate}</p>
                                     </Link>
                                 </div>
                             )
