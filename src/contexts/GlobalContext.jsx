@@ -24,6 +24,26 @@ const GlobalProvider = ({ children }) => {
 
 
 
+    // show su post specifico
+    const [singlePost, setSinglePost] = useState({});
+
+    async function fetchSinglePost(id) {
+        setSinglePost({})
+
+        const { data, error } = await supabase
+            .from("posts")
+            .select()
+            .eq('id', id)
+            .single() // per restituire un oggetto visto che supabase restituisce sempre un array
+        setSinglePost(data || {})
+
+        if (error) {
+            console.error(error)
+        }
+    };
+
+
+
     // creazione nuovo post
     const [post, setPost] = useState({
         event: "",
@@ -101,7 +121,9 @@ const GlobalProvider = ({ children }) => {
         createPost,
         isOpen,
         setIsOpen,
-        removePost
+        removePost,
+        fetchSinglePost,
+        singlePost
     };
 
     return (

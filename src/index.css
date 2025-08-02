@@ -3,3 +3,15 @@
 * {
     /* border: 1px solid red; */
 }
+
+:root {
+    --white: #faffff;
+    --salvia: #99b3b4;
+    --street: #748b80;
+    --light-blue: #99CBFF;
+    --peach: #f2e8d5;
+}
+
+body {
+    background-color: var(--white);
+}
