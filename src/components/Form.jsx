@@ -5,19 +5,21 @@ export default function Form() {
 
     return (
         <form
-            className="flex flex-col justify-between items-center gap-3 bg-(--peach) p-5 rounded shadow shadow-gray-500"
+            className="flex flex-col justify-between items-center gap-3 bg-(--peach) p-5 rounded shadow shadow-gray-500 mx-auto w-1/2"
             onSubmit={createPost}>
+            <label className="font-bold self-start">Tipo di attività</label>
             <input
-                className=" w-full rounded py-1.5 px-2 shadow bg-white"
+                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="text"
-                placeholder="Evento"
+                placeholder="Attività"
                 name="event"
                 value={post.event}
                 onChange={handleChange}
             />
 
+            <label className="font-bold self-start">Luogo</label>
             <input
-                className=" w-full rounded py-1.5 px-2 shadow bg-white"
+                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="text"
                 placeholder="Località"
                 name="location"
@@ -25,16 +27,18 @@ export default function Form() {
                 onChange={handleChange}
             />
 
+            <label className="font-bold self-start">Data</label>
             <input
-                className=" w-full rounded py-1.5 px-2 shadow bg-white"
+                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="date"
                 name="date"
                 value={post.date}
                 onChange={handleChange}
             />
 
+            <label className="font-bold self-start">Descrizione</label>
             <input
-                className=" w-full rounded py-1.5 px-2 shadow bg-white"
+                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="text"
                 placeholder="Descrizione"
                 name="description"
@@ -42,8 +46,9 @@ export default function Form() {
                 onChange={handleChange}
             />
 
+            <label className="font-bold self-start">Costo</label>
             <input
-                className=" w-full rounded py-1.5 px-2 shadow bg-white"
+                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="number"
                 step={0.01}
                 placeholder="Prezzo"
@@ -51,6 +56,26 @@ export default function Form() {
                 value={post.cost}
                 onChange={handleChange}
             />
+
+            <label className="font-bold self-start">Aggiungi una foto</label>
+            <input
+                type="file"
+                name="image"
+                accept="image/*"
+                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
+                onChange={handleChange}
+            />
+
+            {/* anteprima foto */}
+            {post.image && (
+                <div className="w-full">
+                    <img
+                        src={URL.createObjectURL(post.image)}
+                        alt="Anteprima"
+                        className="w-full h-50 object-cover rounded"
+                    />
+                </div>
+            )}
 
             <button type="submit" className="bg-(--street) text-white py-1.5 px-2 w-50 rounded-full shadow cursor-pointer">Aggiungi</button>
         </form>

@@ -1,11 +1,11 @@
-import { Link } from "react-router"
+import { Link } from "react-router-dom";
 import { useGlobalContext } from "../contexts/GlobalContext"
 
 // components
 import Form from "../components/Form";
 
 export default function Home() {
-    const { posts, isOpen, setIsOpen, fetchSinglePost } = useGlobalContext();
+    const { posts, isOpen, setIsOpen } = useGlobalContext();
 
     return (
         <>
@@ -31,7 +31,7 @@ export default function Home() {
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
                 {
                     posts.map((post, index) => {
-                        const { id, event, location, date } = post;
+                        const { id, event, location, date, image } = post;
 
                         // from yyyy-mm-dd to dd-mm-yyyy
                         const newDate = date.split("-").reverse().join("/");
@@ -43,7 +43,7 @@ export default function Home() {
                                     className="flex flex-col gap-2"
                                 >
                                     <img
-                                        src="https://hips.hearstapps.com/hmg-prod/images/logan-armstrong-hvhfqhdyciu-unsplash-1-1606122043.jpg?crop=0.66640625xw:1xh;center,top&resize=640:*"
+                                        src={image || "https://hips.hearstapps.com/hmg-prod/images/logan-armstrong-hvhfqhdyciu-unsplash-1-1606122043.jpg?crop=0.66640625xw:1xh;center,top&resize=640:*"}
                                         alt={`Foto ${event}`}
                                         className="rounded relative"
                                     />

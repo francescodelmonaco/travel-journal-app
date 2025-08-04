@@ -9,7 +9,7 @@ export default function PostDetails() {
 
     useEffect(() => { fetchSinglePost(id) }, [id]);
 
-    const { event, location, date, description, cost } = singlePost;
+    const { event, location, date, description, cost, image } = singlePost;
 
     return (
         <>
@@ -24,11 +24,18 @@ export default function PostDetails() {
             </button>
 
             <div>
-                <p>{event}</p>
-                <p>{location}</p>
-                <p>{date}</p>
+                {image && ( // Mostra l'immagine se presente
+                    <img
+                        src={image}
+                        alt={event}
+                        className="w-full h-64 object-cover rounded mb-4"
+                    />
+                )}
+                <h1 className="text-2xl font-bold">{event}</h1>
+                <p>📍 {location}</p>
+                <p>📅 {date}</p>
                 <p>{description}</p>
-                <p>{cost}</p>
+                <p>💰 € {cost}</p>
             </div>
         </>
     )

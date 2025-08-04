@@ -50,20 +50,46 @@ const GlobalProvider = ({ children }) => {
         location: "",
         date: "",
         description: "",
-        cost: ""
+        cost: "",
+        image: null
     });
 
     const handleChange = e => {
+        const { name, value, type, files } = e.target; // destructuring dei type del form
+
         setPost(prev => {
             return {
                 ...prev,
-                [e.target.name]: e.target.value
+                [name]: type === "file" ? files[0] : value
             }
         })
     }
 
     async function createPost(e) {
         e.preventDefault();
+
+        let imageUrl = null;
+
+        // Upload dell'immagine se presente
+        if (post.image) {
+            const fileName = `${Date.now()}_${post.image.name}`;
+
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('posts-images') // nome del bucket Supabase
+                .upload(fileName, post.image);
+
+            if (uploadError) {
+                console.error('Errore upload immagine:', uploadError);
+                return;
+            }
+
+            // URL pubblico dell'immagine
+            const { data: { publicUrl } } = supabase.storage
+                .from('posts-images')
+                .getPublicUrl(fileName);
+
+            imageUrl = publicUrl;
+        }
 
         const { error } = await supabase
             .from("posts")
@@ -72,7 +98,8 @@ const GlobalProvider = ({ children }) => {
                 location: post.location,
                 date: post.date,
                 description: post.description,
-                cost: post.cost
+                cost: post.cost,
+                image: imageUrl
             })
 
         // chiudo form
@@ -84,7 +111,8 @@ const GlobalProvider = ({ children }) => {
             location: "",
             date: "",
             description: "",
-            cost: ""
+            cost: "",
+            image: null
         })
 
         await fetchPosts()
@@ -103,10 +131,15 @@ const GlobalProvider = ({ children }) => {
 
     // eliminazione di un post
     async function removePost(id) {
-        await supabase
+        const { error } = await supabase
             .from("posts")
             .delete()
             .eq('id', id)
+
+        if (error) {
+            console.error('Errore eliminazione post:', error)
+            return
+        }
 
         await fetchPosts()
     };

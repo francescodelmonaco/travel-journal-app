@@ -11,9 +11,9 @@ export default function App() {
     <BrowserRouter>
       <GlobalProvider>
         <Routes>
-          <Route path="/" Component={DefaultLayout}>
-            <Route index Component={Home} />
-            <Route path=":id" Component={PostDetails} />
+          <Route path="/" element={<DefaultLayout />}>
+            <Route index element={<Home />} />
+            <Route path=":id" element={<PostDetails />} />
           </Route>
         </Routes>
       </GlobalProvider>
