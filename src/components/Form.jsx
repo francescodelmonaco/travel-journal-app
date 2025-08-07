@@ -5,14 +5,14 @@ export default function Form() {
 
     return (
         <form
-            className="flex flex-col justify-between items-center gap-3 bg-(--peach) p-5 rounded shadow shadow-gray-500 mx-auto w-1/2"
+            className="flex flex-col justify-between items-center gap-3 bg-(--peach) p-5 rounded shadow shadow-gray-500 mx-auto w-2/3"
             onSubmit={createPost}>
             <label className="font-bold self-start">Tipo di attività</label>
             <input
                 required
                 className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="text"
-                placeholder="Attività"
+                placeholder="Escursione, visita museo, giornata in spiaggia..."
                 name="event"
                 value={post.event}
                 onChange={handleChange}
@@ -23,7 +23,7 @@ export default function Form() {
                 required
                 className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="text"
-                placeholder="Località"
+                placeholder="Barcellona, San Teodoro, Milano..."
                 name="location"
                 value={post.location}
                 onChange={handleChange}
@@ -40,7 +40,7 @@ export default function Form() {
             />
 
             <label className="font-bold self-start">Descrizione</label>
-            <input
+            <textarea
                 required
                 className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="text"
@@ -48,7 +48,7 @@ export default function Form() {
                 name="description"
                 value={post.description}
                 onChange={handleChange}
-            />
+            ></textarea>
 
             <label className="font-bold self-start">Costo</label>
             <input
@@ -56,7 +56,7 @@ export default function Form() {
                 className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="number"
                 step={0.01}
-                placeholder="Prezzo"
+                placeholder="9.99"
                 name="cost"
                 value={post.cost}
                 onChange={handleChange}
@@ -99,7 +99,7 @@ export default function Form() {
             </select>
 
             <label className="font-bold self-start">Pro dell'esperienza</label>
-            <input
+            <textarea
                 required
                 className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="text"
@@ -107,10 +107,10 @@ export default function Form() {
                 name="pros"
                 value={post.pros}
                 onChange={handleChange}
-            />
+            ></textarea>
 
             <label className="font-bold self-start">Contro dell'esperienza</label>
-            <input
+            <textarea
                 required
                 className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="text"
@@ -118,7 +118,7 @@ export default function Form() {
                 name="cons"
                 value={post.cons}
                 onChange={handleChange}
-            />
+            ></textarea>
 
             <label className="font-bold self-start">Sforzo fisico dell'esperienza</label>
             <input

@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 
-export default function PostCard({ pageId, event, location, date, image }) {
+function PostCard({ pageId, event, location, date, image }) {
     return (
         <Link
             to={`/${pageId}`}
@@ -13,7 +14,9 @@ export default function PostCard({ pageId, event, location, date, image }) {
             />
             <h3 className="font-bold text-xl">{event}</h3>
             <p>📍 {location}</p>
-            <p className="absolute self-end mt-2 me-2 bg-white py-1.5 px-3 rounded-full shadow shadow-gray-500">{date}</p>
+            <p className="absolute self-end mt-2 me-2 bg-white py-1.5 px-3 rounded-full shadow shadow-gray-500">📅 {date}</p>
         </Link>
     )
-}
+};
+
+export default memo(PostCard);
