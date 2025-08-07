@@ -51,7 +51,11 @@ const GlobalProvider = ({ children }) => {
         date: "",
         description: "",
         cost: "",
-        image: null
+        image: null,
+        mood: "",
+        pros: "",
+        cons: "",
+        effort: 1
     });
 
     const handleChange = e => {
@@ -99,7 +103,11 @@ const GlobalProvider = ({ children }) => {
                 date: post.date,
                 description: post.description,
                 cost: post.cost,
-                image: imageUrl
+                image: imageUrl,
+                mood: post.mood,
+                pros: post.pros,
+                cons: post.cons,
+                effort: post.effort
             })
 
         // chiudo form
@@ -112,7 +120,11 @@ const GlobalProvider = ({ children }) => {
             date: "",
             description: "",
             cost: "",
-            image: null
+            image: null,
+            mood: "",
+            pros: "",
+            cons: "",
+            effort: 1
         })
 
         await fetchPosts()
