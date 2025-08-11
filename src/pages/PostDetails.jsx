@@ -23,7 +23,7 @@ export default function PostDetails() {
         } else {
             return "☆☆☆☆☆"
         }
-    }
+    };
 
     return (
         <>
@@ -44,7 +44,7 @@ export default function PostDetails() {
                     <img
                         src={image}
                         alt={event}
-                        className="w-full h-64 object-cover rounded py-3"
+                        className="w-full h-64 object-cover rounded"
                     />
                 )}
 

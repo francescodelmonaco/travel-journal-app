@@ -5,22 +5,32 @@ import Form from "../components/Form";
 import PostCard from "../components/PostCard";
 
 export default function Home() {
-    const { posts, isOpen, setIsOpen } = useGlobalContext();
+    const { isOpen, setIsOpen, query, setQuery, filteredPosts } = useGlobalContext();
 
     return (
         <>
-            <button
-                className="bg-(--street) text-white py-1.5 px-2 w-10 h-10 rounded-full shadow shadow-gray-500 cursor-pointer self-end"
-                onClick={() => setIsOpen(prev => !prev)}
-            >
-                {
-                    isOpen && (
-                        <i className="fa-solid fa-xmark"></i>
-                    ) || (
-                        <i className="fa-solid fa-plus"></i>
-                    )
-                }
-            </button>
+            <div className="pt-5 flex justify-between gap-5">
+                <input
+                    type="search"
+                    name="search"
+                    className="border border-(--street) bg-(--white) rounded-xl px-3 w-75"
+                    value={query}
+                    onChange={e => setQuery(e.target.value)}
+                />
+
+                <button
+                    className="bg-(--street) text-white py-1.5 px-2 w-10 h-10 rounded-full shadow shadow-gray-500 cursor-pointer"
+                    onClick={() => setIsOpen(prev => !prev)}
+                >
+                    {
+                        isOpen && (
+                            <i className="fa-solid fa-xmark"></i>
+                        ) || (
+                            <i className="fa-solid fa-plus"></i>
+                        )
+                    }
+                </button>
+            </div>
 
             {
                 isOpen && (
@@ -30,7 +40,7 @@ export default function Home() {
 
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-5 pb-5">
                 {
-                    posts.map((post, index) => {
+                    filteredPosts.map((post, index) => {
                         const { id, event, location, date, image } = post;
 
                         // from yyyy-mm-dd to dd-mm-yyyy

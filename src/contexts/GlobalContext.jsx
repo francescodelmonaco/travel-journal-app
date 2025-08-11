@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { supabase } from "../supabaseClient";
 
 // creo provider
@@ -21,6 +21,16 @@ const GlobalProvider = ({ children }) => {
     };
 
     useEffect(() => { fetchPosts() }, []);
+
+
+
+    // search
+    const [query, setQuery] = useState(""); // testo search bar
+
+    const filteredPosts = useMemo(() => {
+        if (!query) return posts;
+        return posts.filter(p => p.event.trim().toLowerCase().includes(query.trim().toLowerCase()));
+    }, [posts, query]);
 
 
 
@@ -168,7 +178,10 @@ const GlobalProvider = ({ children }) => {
         setIsOpen,
         removePost,
         fetchSinglePost,
-        singlePost
+        singlePost,
+        query,
+        setQuery,
+        filteredPosts
     };
 
     return (
