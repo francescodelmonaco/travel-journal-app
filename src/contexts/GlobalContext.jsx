@@ -28,16 +28,28 @@ const GlobalProvider = ({ children }) => {
     const [query, setQuery] = useState(""); // testo search bar
     const [debouncedQuery, setDebouncedQuery] = useState(""); // query con ritardo
 
+    // filtro mood
+    const [moodFilter, setMoodFilter] = useState("");
+
     // debounce
     useEffect(() => {
         const timer = setTimeout(() => setDebouncedQuery(query), 500);
         return () => clearTimeout(timer);
     }, [query]);
 
-    const filteredPosts = useMemo(() => {
-        if (!query) return posts;
-        return posts.filter(p => p.event.trim().toLowerCase().includes(debouncedQuery.trim().toLowerCase()));
-    }, [posts, debouncedQuery]);
+    const searchedPosts = useMemo(() => {
+        let filteredPosts = posts;
+
+        if (moodFilter) {
+            return filteredPosts.filter(p => p.mood === moodFilter)
+        };
+
+        if (debouncedQuery) {
+            return filteredPosts.filter(p => p.event.trim().toLowerCase().includes(debouncedQuery.trim().toLowerCase()));
+        };
+
+        return filteredPosts;
+    }, [posts, debouncedQuery, moodFilter]);
 
 
 
@@ -188,7 +200,9 @@ const GlobalProvider = ({ children }) => {
         singlePost,
         query,
         setQuery,
-        filteredPosts
+        searchedPosts,
+        moodFilter,
+        setMoodFilter
     };
 
     return (

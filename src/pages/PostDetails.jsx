@@ -28,7 +28,7 @@ export default function PostDetails() {
     return (
         <>
             <button
-                className="bg-red-900 text-white py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer self-end"
+                className="bg-red-900 text-white py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer self-end mt-5"
                 onClick={() => {
                     removePost(id);
                     navigate("/")
@@ -44,7 +44,7 @@ export default function PostDetails() {
                     <img
                         src={image}
                         alt={event}
-                        className="w-full h-64 object-cover rounded"
+                        className="w-full h-64 object-cover rounded shadow"
                     />
                 )}
 

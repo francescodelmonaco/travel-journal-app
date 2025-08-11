@@ -10,7 +10,7 @@ function PostCard({ pageId, event, location, date, image }) {
             <img
                 src={image || "https://hips.hearstapps.com/hmg-prod/images/logan-armstrong-hvhfqhdyciu-unsplash-1-1606122043.jpg?crop=0.66640625xw:1xh;center,top&resize=640:*"}
                 alt={`Foto ${event}`}
-                className="rounded relative"
+                className="relative w-full h-64 object-cover rounded shadow"
             />
             <h3 className="font-bold text-xl">{event}</h3>
             <p>📍 {location}</p>
