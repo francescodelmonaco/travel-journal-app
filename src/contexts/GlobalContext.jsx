@@ -26,11 +26,18 @@ const GlobalProvider = ({ children }) => {
 
     // search
     const [query, setQuery] = useState(""); // testo search bar
+    const [debouncedQuery, setDebouncedQuery] = useState(""); // query con ritardo
+
+    // debounce
+    useEffect(() => {
+        const timer = setTimeout(() => setDebouncedQuery(query), 500);
+        return () => clearTimeout(timer);
+    }, [query]);
 
     const filteredPosts = useMemo(() => {
         if (!query) return posts;
-        return posts.filter(p => p.event.trim().toLowerCase().includes(query.trim().toLowerCase()));
-    }, [posts, query]);
+        return posts.filter(p => p.event.trim().toLowerCase().includes(debouncedQuery.trim().toLowerCase()));
+    }, [posts, debouncedQuery]);
 
 
 
