@@ -14,6 +14,17 @@ export default function PostDetails() {
     // from yyyy-mm-dd to dd-mm-yyyy
     const newDate = date ? date.split("-").reverse().join("/") : "";
 
+    // votes
+    const stars = (mood) => {
+        if (mood === "happy") {
+            return "★★★★★"
+        } else if (mood === "neutral") {
+            return "★★☆☆☆"
+        } else {
+            return "☆☆☆☆☆"
+        }
+    }
+
     return (
         <>
             <button
@@ -51,10 +62,10 @@ export default function PostDetails() {
                 <h2 className="font-bold text-center text-xl">Tirando le somme...</h2>
 
                 <div>
-                    <p>{mood}</p>
+                    <p><strong>Voto:</strong> {stars(mood)}</p>
                     <p><strong>Pro:</strong> {pros}</p>
                     <p><strong>Contro:</strong> {cons}</p>
-                    <p><strong>Sforzo fisico (1/5):</strong> {effort}</p>
+                    <p><strong>Sforzo fisico:</strong> {effort} su 5</p>
                 </div>
             </div>
         </>
