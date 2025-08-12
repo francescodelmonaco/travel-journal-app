@@ -31,6 +31,9 @@ const GlobalProvider = ({ children }) => {
     // filtro mood
     const [moodFilter, setMoodFilter] = useState("");
 
+    // filtro effort
+    const [effortFilter, setEffortFilter] = useState("");
+
     // debounce
     useEffect(() => {
         const timer = setTimeout(() => setDebouncedQuery(query), 500);
@@ -41,15 +44,19 @@ const GlobalProvider = ({ children }) => {
         let filteredPosts = posts;
 
         if (moodFilter) {
-            return filteredPosts.filter(p => p.mood === moodFilter)
-        };
+            filteredPosts = filteredPosts.filter(p => p.mood === moodFilter);
+        }
+
+        if (effortFilter) {
+            filteredPosts = filteredPosts.filter(p => p.effort === Number(effortFilter));
+        }
 
         if (debouncedQuery) {
-            return filteredPosts.filter(p => p.event.trim().toLowerCase().includes(debouncedQuery.trim().toLowerCase()));
-        };
+            filteredPosts = filteredPosts.filter(p => p.event.trim().toLowerCase().includes(debouncedQuery.trim().toLowerCase()));
+        }
 
         return filteredPosts;
-    }, [posts, debouncedQuery, moodFilter]);
+    }, [posts, debouncedQuery, moodFilter, effortFilter]);
 
 
 
@@ -202,7 +209,9 @@ const GlobalProvider = ({ children }) => {
         setQuery,
         searchedPosts,
         moodFilter,
-        setMoodFilter
+        setMoodFilter,
+        effortFilter,
+        setEffortFilter
     };
 
     return (
