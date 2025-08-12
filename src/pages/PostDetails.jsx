@@ -37,14 +37,14 @@ export default function PostDetails() {
                 <i className="fa-solid fa-trash"></i>
             </button>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 pb-5">
                 <h1 className="text-2xl font-bold text-center">{event} | 📍 {location}</h1>
 
                 {image && (
                     <img
                         src={image}
                         alt={event}
-                        className="w-full h-64 object-cover rounded shadow"
+                        className="w-full h-100 object-cover rounded shadow my-3"
                     />
                 )}
 

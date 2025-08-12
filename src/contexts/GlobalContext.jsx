@@ -28,11 +28,13 @@ const GlobalProvider = ({ children }) => {
     const [query, setQuery] = useState(""); // testo search bar
     const [debouncedQuery, setDebouncedQuery] = useState(""); // query con ritardo
 
-    // filtro mood
+    // filtri
     const [moodFilter, setMoodFilter] = useState("");
-
-    // filtro effort
     const [effortFilter, setEffortFilter] = useState("");
+
+    // sort
+    const [priceSort, setPriceSort] = useState("");
+    const [dateSort, setDateSort] = useState("");
 
     // debounce
     useEffect(() => {
@@ -51,12 +53,24 @@ const GlobalProvider = ({ children }) => {
             filteredPosts = filteredPosts.filter(p => p.effort === Number(effortFilter));
         }
 
+        if (priceSort === "inc") {
+            filteredPosts = [...filteredPosts].sort((a, b) => Number(a.cost) - Number(b.cost))
+        } else if (priceSort === "dec") {
+            filteredPosts = [...filteredPosts].sort((a, b) => Number(b.cost) - Number(a.cost))
+        }
+
+        if (dateSort === "inc") {
+            filteredPosts = [...filteredPosts].sort((a, b) => Number(a.cost) - Number(b.cost))
+        } else if (dateSort === "dec") {
+            filteredPosts = [...filteredPosts].sort((a, b) => Number(b.cost) - Number(a.cost))
+        }
+
         if (debouncedQuery) {
             filteredPosts = filteredPosts.filter(p => p.event.trim().toLowerCase().includes(debouncedQuery.trim().toLowerCase()));
         }
 
         return filteredPosts;
-    }, [posts, debouncedQuery, moodFilter, effortFilter]);
+    }, [posts, debouncedQuery, moodFilter, effortFilter, priceSort, dateSort]);
 
 
 
@@ -211,7 +225,11 @@ const GlobalProvider = ({ children }) => {
         moodFilter,
         setMoodFilter,
         effortFilter,
-        setEffortFilter
+        setEffortFilter,
+        priceSort,
+        setPriceSort,
+        dateSort,
+        setDateSort
     };
 
     return (
