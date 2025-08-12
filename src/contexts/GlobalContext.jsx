@@ -32,9 +32,19 @@ const GlobalProvider = ({ children }) => {
     const [moodFilter, setMoodFilter] = useState("");
     const [effortFilter, setEffortFilter] = useState("");
 
-    // sort
+    // ordinamento
     const [priceSort, setPriceSort] = useState("");
     const [dateSort, setDateSort] = useState("");
+
+    // reset filtri ed ordinamento
+    const filterAndSortReset = (e) => {
+        e.preventDefault();
+
+        setMoodFilter("");
+        setEffortFilter("");
+        setPriceSort("");
+        setDateSort("");
+    };
 
     // debounce
     useEffect(() => {
@@ -229,7 +239,8 @@ const GlobalProvider = ({ children }) => {
         priceSort,
         setPriceSort,
         dateSort,
-        setDateSort
+        setDateSort,
+        filterAndSortReset
     };
 
     return (

@@ -18,7 +18,8 @@ export default function Home() {
         priceSort,
         setPriceSort,
         dateSort,
-        setDateSort
+        setDateSort,
+        filterAndSortReset
     } = useGlobalContext();
 
     return (
@@ -28,13 +29,13 @@ export default function Home() {
                     type="search"
                     name="search"
                     placeholder="Cerca un'attività..."
-                    className="border border-(--street) bg-(--white) rounded-full px-3 w-2/3 shadow"
+                    className="border border-(--street) bg-(--white) rounded-full px-3 w-7/8 shadow"
                     value={query}
                     onChange={e => setQuery(e.target.value)}
                 />
 
                 <button
-                    className="bg-(--street) text-white py-1.5 px-2 w-1/3 h-10 rounded-full shadow shadow-gray-500 cursor-pointer"
+                    className="bg-(--street) text-white py-1.5 px-2 w-1/8 rounded-full shadow shadow-gray-500 cursor-pointer"
                     onClick={() => setIsOpen(prev => !prev)}
                 >
                     {
@@ -53,54 +54,61 @@ export default function Home() {
                 )
             }
 
-            <div className="flex justify-between gap-3 bg-(--salvia) p-2 rounded-full shadow mx-auto w-2/3">
-                <select
-                    name="mood-filter"
-                    className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/4"
-                    value={moodFilter}
-                    onChange={e => setMoodFilter(e.target.value)}
-                >
-                    <option value="">Voto</option>
-                    <option value="happy">★★★★★</option>
-                    <option value="neutral">★★☆☆☆</option>
-                    <option value="sad">☆☆☆☆☆</option>
-                </select>
+            <div className="flex justify-between gap-3">
+                <div className="flex justify-between gap-3 bg-(--salvia) p-2 rounded-full shadow w-7/8">
+                    <select
+                        name="mood-filter"
+                        className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/4"
+                        value={moodFilter}
+                        onChange={e => setMoodFilter(e.target.value)}
+                    >
+                        <option value="">Voto</option>
+                        <option value="happy">★★★★★</option>
+                        <option value="neutral">★★☆☆☆</option>
+                        <option value="sad">☆☆☆☆☆</option>
+                    </select>
 
-                <select
-                    name="effort-filter"
-                    className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/4"
-                    value={effortFilter}
-                    onChange={e => setEffortFilter(e.target.value)}
-                >
-                    <option value="">Impegno</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                    <select
+                        name="effort-filter"
+                        className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/4"
+                        value={effortFilter}
+                        onChange={e => setEffortFilter(e.target.value)}
+                    >
+                        <option value="">Impegno</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
 
-                <select
-                    name="price-sort"
-                    className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/4"
-                    value={priceSort}
-                    onChange={e => setPriceSort(e.target.value)}
-                >
-                    <option value="">Prezzo</option>
-                    <option value="inc">Crescente</option>
-                    <option value="dec">Decrescente</option>
-                </select>
+                    <select
+                        name="price-sort"
+                        className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/4"
+                        value={priceSort}
+                        onChange={e => setPriceSort(e.target.value)}
+                    >
+                        <option value="">Prezzo</option>
+                        <option value="inc">Crescente</option>
+                        <option value="dec">Decrescente</option>
+                    </select>
 
-                <select
-                    name="data-sort"
-                    className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/4"
-                    value={dateSort}
-                    onChange={e => setDateSort(e.target.value)}
-                >
-                    <option value="">Data</option>
-                    <option value="inc">Crescente</option>
-                    <option value="dec">Decrescente</option>
-                </select>
+                    <select
+                        name="data-sort"
+                        className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/4"
+                        value={dateSort}
+                        onChange={e => setDateSort(e.target.value)}
+                    >
+                        <option value="">Data</option>
+                        <option value="inc">Crescente</option>
+                        <option value="dec">Decrescente</option>
+                    </select>
+                </div>
+
+                <button
+                    className="bg-(--street) text-white w-1/8 rounded-full shadow shadow-gray-500 cursor-pointer"
+                    onClick={filterAndSortReset}
+                >Resetta filtri</button>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-5">
