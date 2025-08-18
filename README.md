@@ -40,7 +40,7 @@ Ogni tappa del diario include:
 
 ## 🔗 Deployment
 
-Il progetto è stato pubblicato con Vercel ed è raggiungibile cliccando il seguente [link](https://travel-journal-app-francesco-delmonacos-projects.vercel.app/).
+Il progetto è stato pubblicato con Vercel ed è raggiungibile cliccando il seguente [link](https://travel-journal-app-umber.vercel.app/).
 
 ## 🚀 Clonazione e personalizzazione del progetto
 
