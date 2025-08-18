@@ -75,9 +75,9 @@ const GlobalProvider = ({ children }) => {
         }
 
         if (dateSort === "inc") {
-            filteredPosts = [...filteredPosts].sort((a, b) => Number(a.cost) - Number(b.cost))
+            filteredPosts = [...filteredPosts].sort((a, b) => new Date(a.date) - new Date(b.date));
         } else if (dateSort === "dec") {
-            filteredPosts = [...filteredPosts].sort((a, b) => Number(b.cost) - Number(a.cost))
+            filteredPosts = [...filteredPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
         }
 
         if (debouncedQuery) {
