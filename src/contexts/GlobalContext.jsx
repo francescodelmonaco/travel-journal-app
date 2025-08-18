@@ -8,16 +8,21 @@ const GlobalProvider = ({ children }) => {
 
     // index di tutti i posts
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     async function fetchPosts() {
+        setLoading(true);
+
         const { data, error } = await supabase
             .from("posts")
             .select("*")
-        setPosts(data)
+        setPosts(data);
+
+        setLoading(false);
 
         if (error) {
             console.error(error)
-        }
+        };
     };
 
     useEffect(() => { fetchPosts() }, []);
@@ -88,18 +93,22 @@ const GlobalProvider = ({ children }) => {
     const [singlePost, setSinglePost] = useState({});
 
     async function fetchSinglePost(id) {
-        setSinglePost({})
+        setLoading(true);
+
+        setSinglePost({});
 
         const { data, error } = await supabase
             .from("posts")
             .select()
             .eq('id', id)
             .single() // per restituire un oggetto visto che supabase restituisce sempre un array
-        setSinglePost(data || {})
+        setSinglePost(data || {});
+
+        setLoading(false);
 
         if (error) {
             console.error(error)
-        }
+        };
     };
 
 
@@ -240,7 +249,8 @@ const GlobalProvider = ({ children }) => {
         setPriceSort,
         dateSort,
         setDateSort,
-        filterAndSortReset
+        filterAndSortReset,
+        loading
     };
 
     return (

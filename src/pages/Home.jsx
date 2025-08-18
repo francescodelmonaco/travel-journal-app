@@ -4,6 +4,7 @@ import { useGlobalContext } from "../contexts/GlobalContext"
 import Form from "../components/Form";
 import PostCard from "../components/PostCard";
 import FilterBar from "../components/FilterBar";
+import Loader from "../components/Loader";
 
 export default function Home() {
     const {
@@ -11,7 +12,8 @@ export default function Home() {
         setIsOpen,
         query,
         setQuery,
-        searchedPosts
+        searchedPosts,
+        loading
     } = useGlobalContext();
 
     return (
@@ -48,28 +50,33 @@ export default function Home() {
 
             <FilterBar />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-5">
-                {
-                    searchedPosts.map((post, index) => {
-                        const { id, event, location, date, image } = post;
+            {loading ? (
+                <Loader />
+            ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-5">
+                    {
+                        searchedPosts.map((post, index) => {
+                            const { id, event, location, date, image } = post;
 
-                        // from yyyy-mm-dd to dd-mm-yyyy
-                        const newDate = date.split("-").reverse().join("/");
+                            // from yyyy-mm-dd to dd-mm-yyyy
+                            const newDate = date.split("-").reverse().join("/");
 
-                        return (
-                            <div key={index} className="bg-white rounded p-3 shadow shadow-gray-400">
-                                <PostCard
-                                    pageId={id}
-                                    event={event}
-                                    location={location}
-                                    date={newDate}
-                                    image={image}
-                                />
-                            </div>
-                        )
-                    })
-                }
-            </div>
+                            return (
+                                <div key={index} className="bg-white rounded p-3 shadow shadow-gray-400">
+                                    <PostCard
+                                        pageId={id}
+                                        event={event}
+                                        location={location}
+                                        date={newDate}
+                                        image={image}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
+                </div >
+            )
+            }
         </>
     )
 }

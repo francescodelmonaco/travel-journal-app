@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useGlobalContext } from "../contexts/GlobalContext"
 import { useEffect } from "react";
+import Loader from "../components/Loader";
 
 export default function PostDetails() {
     const { id } = useParams();
-    const { removePost, fetchSinglePost, singlePost } = useGlobalContext();
+    const { removePost, fetchSinglePost, singlePost, loading } = useGlobalContext();
     const navigate = useNavigate();
 
     useEffect(() => { fetchSinglePost(id) }, [id]);
@@ -27,47 +28,55 @@ export default function PostDetails() {
 
     return (
         <>
-            <button
-                className="bg-red-900 text-white py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer self-end mt-5"
-                onClick={() => {
-                    removePost(id);
-                    navigate("/")
-                }}
-            >
-                <i className="fa-solid fa-trash"></i>
-            </button>
+            {
+                loading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        <button
+                            className="bg-red-900 text-white py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer self-end mt-5"
+                            onClick={() => {
+                                removePost(id);
+                                navigate("/")
+                            }}
+                        >
+                            <i className="fa-solid fa-trash"></i>
+                        </button>
 
-            <div className="flex flex-col gap-2 pb-5">
-                <h1 className="text-2xl font-bold text-center">{event} | 📍 {location}</h1>
+                        <div className="flex flex-col gap-2 pb-5">
+                            <h1 className="text-2xl font-bold text-center">{event} | 📍 {location}</h1>
 
-                {image && (
-                    <img
-                        src={image}
-                        alt={event}
-                        className="w-full h-100 object-cover rounded shadow my-3"
-                    />
-                )}
+                            {image && (
+                                <img
+                                    src={image}
+                                    alt={event}
+                                    className="w-full h-100 object-cover rounded shadow my-3"
+                                />
+                            )}
 
-                <h2 className="font-bold text-center text-xl">Info sull'esperienza</h2>
+                            <h2 className="font-bold text-center text-xl">Info sull'esperienza</h2>
 
-                <p>📅 <strong>Data:</strong> {newDate}</p>
-                <p>💰 <strong>Prezzo:</strong> € {cost}</p>
+                            <p>📅 <strong>Data:</strong> {newDate}</p>
+                            <p>💰 <strong>Prezzo:</strong> € {cost}</p>
 
 
-                <div>
-                    <p className="font-bold">Descrizione:</p>
-                    <p className="text-justify">{description}</p>
-                </div>
+                            <div>
+                                <p className="font-bold">Descrizione:</p>
+                                <p className="text-justify">{description}</p>
+                            </div>
 
-                <h2 className="font-bold text-center text-xl">Tirando le somme...</h2>
+                            <h2 className="font-bold text-center text-xl">Tirando le somme...</h2>
 
-                <div>
-                    <p><strong>Voto:</strong> {stars(mood)}</p>
-                    <p><strong>Pro:</strong> {pros}</p>
-                    <p><strong>Contro:</strong> {cons}</p>
-                    <p><strong>Sforzo fisico:</strong> {effort} su 5</p>
-                </div>
-            </div>
+                            <div>
+                                <p><strong>Voto:</strong> {stars(mood)}</p>
+                                <p><strong>Pro:</strong> {pros}</p>
+                                <p><strong>Contro:</strong> {cons}</p>
+                                <p><strong>Sforzo fisico:</strong> {effort} su 5</p>
+                            </div>
+                        </div>
+                    </>
+                )
+            }
         </>
     )
 }
