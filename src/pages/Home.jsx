@@ -21,13 +21,13 @@ export default function Home() {
                     type="search"
                     name="search"
                     placeholder="Cerca un'attività..."
-                    className="border border-(--street) bg-(--white) rounded-full px-3 w-3/4 shadow"
+                    className="border border-(--street) bg-(--white) rounded-full px-3 w-4/5 shadow"
                     value={query}
                     onChange={e => setQuery(e.target.value)}
                 />
 
                 <button
-                    className="bg-(--street) text-white py-2 px-2 w-1/4 rounded-full shadow shadow-gray-500 cursor-pointer"
+                    className="bg-(--street) text-white py-2 px-2 w-1/5 rounded-full shadow cursor-pointer"
                     onClick={() => setIsOpen(prev => !prev)}
                 >
                     {
@@ -57,7 +57,7 @@ export default function Home() {
                         const newDate = date.split("-").reverse().join("/");
 
                         return (
-                            <div key={index} className="bg-white rounded p-3 shadow shadow-gray-500">
+                            <div key={index} className="bg-white rounded p-3 shadow shadow-gray-400">
                                 <PostCard
                                     pageId={id}
                                     event={event}

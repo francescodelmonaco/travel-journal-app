@@ -6,7 +6,7 @@ import DefaultLayout from "./layouts/DefaultLayout"
 // pages
 import Home from "./pages/Home"
 import PostDetails from "./pages/PostDetails"
-import Login from "./pages/Login"
+// import Login from "./pages/Login"
 
 export default function App() {
   return (
@@ -16,7 +16,7 @@ export default function App() {
           {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<Home />} />
-            <Route path=":id" element={<PostDetails />} />
+            <Route path="/events/:id" element={<PostDetails />} />
           </Route>
         </Routes>
       </GlobalProvider>

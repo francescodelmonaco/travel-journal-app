@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function PostCard({ pageId, event, location, date, image }) {
     return (
         <Link
-            to={`/${pageId}`}
+            to={`events/${pageId}`}
             className="flex flex-col gap-2"
         >
             <img
