@@ -23,13 +23,13 @@ export default function Home() {
                     type="search"
                     name="search"
                     placeholder="Cerca un'attività..."
-                    className="border border-(--street) bg-(--white) rounded-full px-3 w-4/5 shadow"
+                    className="border border-(--street) bg-(--white) rounded-full px-3 w-1/2 sm:w-4/5 shadow"
                     value={query}
                     onChange={e => setQuery(e.target.value)}
                 />
 
                 <button
-                    className="bg-(--street) text-white py-2 px-2 w-1/5 rounded-full shadow cursor-pointer"
+                    className="bg-(--street) text-white py-2 px-2 w-1/2 sm:w-1/5 rounded-full shadow cursor-pointer"
                     onClick={() => setIsOpen(prev => !prev)}
                 >
                     {

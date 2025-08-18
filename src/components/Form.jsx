@@ -5,7 +5,7 @@ export default function Form() {
 
     return (
         <form
-            className="flex flex-col justify-between items-center gap-3 bg-(--peach) p-5 rounded shadow shadow-gray-400 mx-auto w-3/4"
+            className="flex flex-col justify-between items-center gap-3 bg-(--peach) p-5 rounded-3xl shadow shadow-gray-400 mx-auto sm:w-3/4"
             onSubmit={createPost}>
             <label className="font-bold self-start">Tipo di attività</label>
             <input
@@ -44,7 +44,7 @@ export default function Form() {
                 required
                 className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="text"
-                placeholder="Descrizione"
+                placeholder="Racconta cos'hai fatto"
                 name="description"
                 value={post.description}
                 onChange={handleChange}
@@ -56,7 +56,7 @@ export default function Form() {
                 className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
                 type="number"
                 step={0.01}
-                placeholder="9.99"
+                placeholder="es. 9.99"
                 name="cost"
                 value={post.cost}
                 onChange={handleChange}
@@ -133,7 +133,7 @@ export default function Form() {
                 onChange={handleChange}
             />
 
-            <button type="submit" className="bg-(--street) text-white py-1.5 px-2 w-50 rounded-full shadow cursor-pointer">Aggiungi</button>
+            <button type="submit" className="bg-(--street) text-white py-1.5 px-2 w-full sm:w-50 rounded-full shadow cursor-pointer">Aggiungi</button>
         </form>
     )
 }

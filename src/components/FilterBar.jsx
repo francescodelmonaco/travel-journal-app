@@ -14,10 +14,10 @@ export default function FilterBar() {
     } = useGlobalContext();
 
     return (
-        <div className="flex justify-between gap-3 bg-(--salvia) p-2 rounded-full shadow">
+        <div className="flex justify-between gap-3 flex-col sm:flex-row bg-(--salvia) p-2 rounded-3xl sm:rounded-full shadow">
             <select
                 name="mood-filter"
-                className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/5"
+                className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow sm:w-1/5"
                 value={moodFilter}
                 onChange={e => setMoodFilter(e.target.value)}
             >
@@ -29,7 +29,7 @@ export default function FilterBar() {
 
             <select
                 name="effort-filter"
-                className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/5"
+                className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow sm:w-1/5"
                 value={effortFilter}
                 onChange={e => setEffortFilter(e.target.value)}
             >
@@ -43,7 +43,7 @@ export default function FilterBar() {
 
             <select
                 name="price-sort"
-                className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/5"
+                className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow sm:w-1/5"
                 value={priceSort}
                 onChange={e => setPriceSort(e.target.value)}
             >
@@ -54,7 +54,7 @@ export default function FilterBar() {
 
             <select
                 name="data-sort"
-                className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow w-1/5"
+                className="bg-(--street) py-1.5 px-3 rounded-full text-(--white) cursor-pointer shadow sm:w-1/5"
                 value={dateSort}
                 onChange={e => setDateSort(e.target.value)}
             >
@@ -64,7 +64,7 @@ export default function FilterBar() {
             </select>
 
             <button
-                className="bg-(--peach) rounded-full shadow cursor-pointer w-1/5"
+                className="bg-(--peach) rounded-full shadow cursor-pointer py-1.5 sm:w-1/5"
                 onClick={filterAndSortReset}
             >Resetta filtri</button>
         </div>
