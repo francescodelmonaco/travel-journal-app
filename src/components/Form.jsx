@@ -5,7 +5,7 @@ export default function Form() {
 
     return (
         <form
-            className="flex flex-col justify-between items-center gap-3 bg-(--peach) p-5 rounded shadow shadow-gray-500 mx-auto w-2/3"
+            className="flex flex-col justify-between items-center gap-3 bg-(--peach) p-5 rounded shadow shadow-gray-500 mx-auto w-3/4"
             onSubmit={createPost}>
             <label className="font-bold self-start">Tipo di attività</label>
             <input

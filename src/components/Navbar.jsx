@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../contexts/GlobalContext";
+import Logo from "/logo.webp";
 
 export default function Navbar() {
     const { setIsOpen } = useGlobalContext();
@@ -12,7 +13,7 @@ export default function Navbar() {
         >
             <img
                 className="w-20"
-                src="/logo.webp"
+                src={Logo}
                 alt="Travel Journal Logo"
             />
 
