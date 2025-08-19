@@ -1,12 +1,12 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../contexts/GlobalContext"
 import { useEffect } from "react";
 import Loader from "../components/Loader";
+import ConfirmModal from "../components/ConfirmModal";
 
 export default function PostDetails() {
     const { id } = useParams();
-    const { removePost, fetchSinglePost, singlePost, loading } = useGlobalContext();
-    const navigate = useNavigate();
+    const { fetchSinglePost, singlePost, loading, showModal, setShowModal } = useGlobalContext();
 
     useEffect(() => { fetchSinglePost(id) }, [id]);
 
@@ -35,13 +35,14 @@ export default function PostDetails() {
                     <>
                         <button
                             className="bg-red-900 text-white py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer self-end mt-5"
-                            onClick={() => {
-                                removePost(id);
-                                navigate("/")
-                            }}
+                            onClick={() => setShowModal(true)}
                         >
                             <i className="fa-solid fa-trash"></i>
                         </button>
+
+                        {showModal &&
+                            <ConfirmModal />
+                        }
 
                         <div className="flex flex-col gap-2 pb-5">
                             <h1 className="text-2xl font-bold text-center">{event} | 📍 {location}</h1>

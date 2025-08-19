@@ -42,7 +42,7 @@ const GlobalProvider = ({ children }) => {
     const [dateSort, setDateSort] = useState("");
 
     // reset filtri ed ordinamento
-    const filterAndSortReset = (e) => {
+    const filterAndSortReset = e => {
         e.preventDefault();
 
         setMoodFilter("");
@@ -171,7 +171,7 @@ const GlobalProvider = ({ children }) => {
                 location: post.location,
                 date: post.date,
                 description: post.description,
-                cost: post.cost,
+                cost: Number(post.cost).toFixed(2),
                 image: imageUrl,
                 mood: post.mood,
                 pros: post.pros,
@@ -181,6 +181,7 @@ const GlobalProvider = ({ children }) => {
 
         // chiudo form
         setIsOpen(prev => !prev)
+
 
         // svuoto form
         setPost({
@@ -208,6 +209,22 @@ const GlobalProvider = ({ children }) => {
     // gestione apertura form
     const [isOpen, setIsOpen] = useState(false);
 
+    const closeForm = () => {
+        setIsOpen(prev => !prev);
+
+        setPost({
+            event: "",
+            location: "",
+            date: "",
+            description: "",
+            cost: "",
+            image: null,
+            mood: "",
+            pros: "",
+            cons: "",
+            effort: 1
+        });
+    };
 
 
     // eliminazione di un post
@@ -224,6 +241,9 @@ const GlobalProvider = ({ children }) => {
 
         await fetchPosts()
     };
+
+    // modale di conferma eliminazione
+    const [showModal, setShowModal] = useState(false);
 
 
 
@@ -250,7 +270,10 @@ const GlobalProvider = ({ children }) => {
         dateSort,
         setDateSort,
         filterAndSortReset,
-        loading
+        loading,
+        closeForm,
+        showModal,
+        setShowModal
     };
 
     return (

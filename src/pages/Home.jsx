@@ -9,11 +9,11 @@ import Loader from "../components/Loader";
 export default function Home() {
     const {
         isOpen,
-        setIsOpen,
         query,
         setQuery,
         searchedPosts,
-        loading
+        loading,
+        closeForm
     } = useGlobalContext();
 
     return (
@@ -30,7 +30,7 @@ export default function Home() {
 
                 <button
                     className="bg-(--street) text-white py-2 px-2 w-1/2 sm:w-1/5 rounded-full shadow cursor-pointer"
-                    onClick={() => setIsOpen(prev => !prev)}
+                    onClick={closeForm}
                 >
                     {
                         isOpen && (
