@@ -24,7 +24,7 @@ export default function Navbar() {
     };
 
     return (
-        <div className="flex justify-between p-3 w-14/15 mx-auto align-middle">
+        <div className="flex justify-between pt-3 w-4/5 mx-auto">
             <Link
                 to={"/"}
                 className="flex justify-between"

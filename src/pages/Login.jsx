@@ -47,7 +47,7 @@ export default function Login() {
 
     if (!session) {
         return (
-            <div className="w-4/5 mx-auto flex flex-col justify-center gap-10 text-center min-h-screen">
+            <div className="w-4/5 mx-auto flex flex-col justify-center gap-15 text-center min-h-screen">
                 <span
                     className='text-(--street) text-2xl'
                 >Benvenuto su...</span>
@@ -63,7 +63,7 @@ export default function Login() {
                 </div>
 
                 <p className='text-(--street) text-2xl'>
-                    Un diario di viaggio interattivo per raccogliere e rivivere i momenti più significativi delle tue vacanze estive.
+                    Un diario di viaggio interattivo per raccogliere e rivivere i momenti più significativi delle tue vacanze estive! 📸🗺️
                 </p>
 
                 <i className="fa-regular fa-circle-down text-4xl text-(--street) self-center animate-bounce"></i>

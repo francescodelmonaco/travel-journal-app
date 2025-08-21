@@ -1,31 +1,36 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { supabase } from "../supabaseClient";
+import { useAuth } from './AuthContext';
 
 // creo provider
 const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
+    const { user } = useAuth();
 
     // index di tutti i posts
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
 
     async function fetchPosts() {
+        if (!user) return;
+
         setLoading(true);
 
         const { data, error } = await supabase
             .from("posts")
             .select("*")
-        setPosts(data);
+            .eq('user_id', user.id);
 
+        setPosts(data || []);
         setLoading(false);
 
         if (error) {
-            console.error(error)
-        };
+            console.error('Errore nel fetch dei posts:', error);
+        }
     };
 
-    useEffect(() => { fetchPosts() }, []);
+    useEffect(() => { fetchPosts() }, [user]);
 
 
 
@@ -143,7 +148,7 @@ const GlobalProvider = ({ children }) => {
 
         let imageUrl = null;
 
-        // Upload dell'immagine se presente
+        // upload dell'immagine se presente
         if (post.image) {
             const fileName = `${Date.now()}_${post.image.name}`;
 
@@ -164,20 +169,14 @@ const GlobalProvider = ({ children }) => {
             imageUrl = publicUrl;
         }
 
-        const { error } = await supabase
+        // inserisci il post con user_id
+        const { data, error } = await supabase
             .from("posts")
-            .insert({
-                event: post.event,
-                location: post.location,
-                date: post.date,
-                description: post.description,
-                cost: Number(post.cost).toFixed(2),
+            .insert([{
+                ...post,
                 image: imageUrl,
-                mood: post.mood,
-                pros: post.pros,
-                cons: post.cons,
-                effort: post.effort
-            })
+                user_id: user.id  // associa il post all'utente corrente
+            }]);
 
         // chiudo form
         setIsOpen(prev => !prev)

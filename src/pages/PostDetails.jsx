@@ -34,12 +34,12 @@ export default function PostDetails() {
                 ) : (
                     <>
                         <div className="flex justify-end gap-3 pt-3">
-                            <button
+                            {/* <button
                                 className="bg-(--street) text-(--white) py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer"
-                            // onClick={() => setShowModal(true)}
+                            onClick={() => setShowModal(true)}
                             >
                                 <i className="fa-solid fa-pen"></i>
-                            </button>
+                            </button> */}
 
                             <button
                                 className="bg-red-900 text-(--white) py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer"
