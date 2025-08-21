@@ -14,14 +14,14 @@ export default function ConfirmModal() {
 
                 <div className="flex justify-between gap-3">
                     <button
-                        className="bg-(--salvia) px-3 py-1.5 rounded-full shadow w-full cursor-pointer"
+                        className="bg-(--street) text-(--white) px-3 py-1.5 rounded-full shadow w-full cursor-pointer"
                         onClick={() => setShowModal(false)}
                     >
                         Annulla
                     </button>
 
                     <button
-                        className="bg-red-900 text-white font-bold px-3 py-1.5 rounded-full shadow w-full cursor-pointer"
+                        className="bg-red-900 text-(--white) font-bold px-3 py-1.5 rounded-full shadow w-full cursor-pointer"
                         onClick={() => {
                             removePost(id);
                             navigate("/")

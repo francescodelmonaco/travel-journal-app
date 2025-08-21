@@ -1,39 +1,72 @@
+import { useState, useEffect } from 'react'
+import { supabase } from '../supabaseClient'
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import Logo from "/logo.webp";
 
 export default function Login() {
-    return (
-        <div className="w-4/5 mx-auto flex flex-col">
-            <div className="w-full mx-auto flex justify-center py-15">
-                <img
-                    className="w-20"
-                    src={Logo}
-                    alt="Travel Journal Logo"
-                />
+    const [session, setSession] = useState(null)
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
-                <h1 className="text-3xl text-center font-bold self-center text-(--street)">Travel Journal</h1>
-            </div>
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session)
+        })
 
-            <form
-                action="submit"
-                className="flex flex-col w-full sm:w-1/2 mx-auto"
-            >
-                <label className="font-bold text-(--street) mb-3">Email</label>
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
 
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="mario.rossi@gmail.com"
-                    required
-                    className="p-3 border border-(--street) rounded-xl mb-1.5"
-                />
+        return () => subscription.unsubscribe()
+    }, [])
 
-                <p className="text-(--street) text-xs mb-7">Inserisci la tua email per ricevere il codice di accesso</p>
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, [user, navigate]);
+
+    const signInWithGoogle = async () => {
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                queryParams: {
+                    prompt: 'select_account',
+                    access_type: 'offline'
+                }
+            }
+        });
+
+        if (error) {
+            console.error('Errore durante il login:', error);
+        }
+    }
+
+    if (!session) {
+        return (
+            <div className="w-4/5 mx-auto flex flex-col">
+                <div className="w-full mx-auto flex justify-center py-15">
+                    <img
+                        className="w-20"
+                        src={Logo}
+                        alt="Travel Journal Logo"
+                    />
+
+                    <h1 className="text-3xl text-center font-bold self-center text-(--street)">Travel Journal</h1>
+                </div>
 
                 <button
-                    type="submit"
-                    className="bg-(--street) text-(--white) p-3 rounded-xl"
-                >Invia codice</button>
-            </form>
-        </div>
-    )
+                    className="cursor-pointer bg-(--white) border border-(--street) p-4 rounded-3xl font-bold text-(--street) flex align-middle justify-center gap-3 w-1/2 self-center"
+                    onClick={signInWithGoogle}>
+                    <i class="fa-brands fa-google self-center"></i>Accedi con Google
+                </button>
+            </div>
+        )
+    }
+    else {
+        return (<div>Logged in!</div>)
+    }
 }

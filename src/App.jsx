@@ -1,25 +1,44 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { GlobalProvider } from "./contexts/GlobalContext"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import DefaultLayout from "./layouts/DefaultLayout"
+import ProtectedRoute from "./components/ProtectedRoute";
+import DefaultLayout from "./layouts/DefaultLayout";
 
 // pages
-import Home from "./pages/Home"
-import PostDetails from "./pages/PostDetails"
-// import Login from "./pages/Login"
+import Home from "./pages/Home";
+import PostDetails from "./pages/PostDetails";
+import Login from "./pages/Login";
 
-export default function App() {
+// contexts
+import { AuthProvider } from "./contexts/AuthContext";
+import { GlobalProvider } from "./contexts/GlobalContext";
+
+function App() {
   return (
-    <BrowserRouter>
+    <AuthProvider>
       <GlobalProvider>
-        <Routes>
-          {/* <Route path="/login" element={<Login />} /> */}
-          <Route path="/" element={<DefaultLayout />}>
-            <Route index element={<Home />} />
-            <Route path="/events/:id" element={<PostDetails />} />
-          </Route>
-        </Routes>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <DefaultLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Home />} />
+              <Route path="events/:id" element={<PostDetails />} />
+            </Route>
+
+            <Route path="*" element={<Navigate to="/" replace />} />
+            {/* aggiungi pagina 404 */}
+
+          </Routes>
+        </BrowserRouter>
       </GlobalProvider>
-    </BrowserRouter>
-  )
+    </AuthProvider>
+  );
 }
+
+export default App;

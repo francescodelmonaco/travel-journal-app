@@ -10,7 +10,7 @@ export default function Form() {
             <label className="font-bold self-start">Tipo di attività</label>
             <input
                 required
-                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
+                className=" w-full rounded py-1.5 px-2 shadow bg-(--white) mb-2"
                 type="text"
                 placeholder="Escursione, visita museo, giornata in spiaggia..."
                 name="event"
@@ -18,31 +18,37 @@ export default function Form() {
                 onChange={handleChange}
             />
 
-            <label className="font-bold self-start">Luogo</label>
-            <input
-                required
-                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
-                type="text"
-                placeholder="Barcellona, San Teodoro, Milano..."
-                name="location"
-                value={post.location}
-                onChange={handleChange}
-            />
+            <div className="flex justify-between w-full gap-5">
+                <div className="flex flex-col w-1/2 gap-3">
+                    <label className="font-bold self-start">Luogo</label>
+                    <input
+                        required
+                        className=" w-full rounded py-1.5 px-2 shadow bg-(--white) mb-2"
+                        type="text"
+                        placeholder="Barcellona, San Teodoro, Milano..."
+                        name="location"
+                        value={post.location}
+                        onChange={handleChange}
+                    />
+                </div>
 
-            <label className="font-bold self-start">Data</label>
-            <input
-                required
-                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
-                type="date"
-                name="date"
-                value={post.date}
-                onChange={handleChange}
-            />
+                <div className="flex flex-col w-1/2 gap-3">
+                    <label className="font-bold self-start">Data</label>
+                    <input
+                        required
+                        className=" w-full rounded py-1.5 px-2 shadow bg-(--white) mb-2"
+                        type="date"
+                        name="date"
+                        value={post.date}
+                        onChange={handleChange}
+                    />
+                </div>
+            </div>
 
             <label className="font-bold self-start">Descrizione</label>
             <textarea
                 required
-                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
+                className=" w-full rounded py-1.5 px-2 shadow bg-(--white) mb-2"
                 type="text"
                 placeholder="Racconta cos'hai fatto"
                 name="description"
@@ -53,7 +59,7 @@ export default function Form() {
             <label className="font-bold self-start">Costo</label>
             <input
                 required
-                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
+                className=" w-full rounded py-1.5 px-2 shadow bg-(--white) mb-2"
                 type="number"
                 step={0.01}
                 placeholder="es. 9.99"
@@ -67,7 +73,7 @@ export default function Form() {
                 type="file"
                 name="image"
                 accept="image/*"
-                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
+                className=" w-full rounded py-1.5 px-2 shadow bg-(--white) mb-2"
                 onChange={handleChange}
             />
 
@@ -82,21 +88,42 @@ export default function Form() {
                 </div>
             )}
 
-            <label className="font-bold self-start">Mood dell'esperienza</label>
-            <select
-                required
-                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
-                type="text"
-                placeholder="😊, 😐 o 😒"
-                name="mood"
-                value={post.mood}
-                onChange={handleChange}
-            >
-                <option value="">Com'è andata?</option>
-                <option value="happy">😊 bellissima esperienza</option>
-                <option value="neutral">😐 nulla di che</option>
-                <option value="sad">😒 da non fare mai più</option>
-            </select>
+            <div className="flex justify-between w-full gap-5">
+                <div className="flex flex-col w-1/2 gap-3">
+                    <label className="font-bold self-start">Mood dell'esperienza</label>
+                    <select
+                        required
+                        className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
+                        type="text"
+                        placeholder="😊, 😐 o 😒"
+                        name="mood"
+                        value={post.mood}
+                        onChange={handleChange}
+                    >
+                        <option value="">Com'è andata?</option>
+                        <option value="happy">😊 bellissima esperienza</option>
+                        <option value="neutral">😐 nulla di che</option>
+                        <option value="sad">😒 da non fare mai più</option>
+                    </select>
+                </div>
+
+                <div className="flex flex-col w-1/2 gap-3">
+                    <label className="font-bold self-start">Sforzo fisico dell'esperienza</label>
+                    <input
+                        required
+                        className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
+                        type="number"
+                        min={1}
+                        max={5}
+                        placeholder="Sforzo fisico da 1 a 5"
+                        name="effort"
+                        value={post.effort}
+                        onChange={handleChange}
+                    />
+                </div>
+            </div>
+
+
 
             <label className="font-bold self-start">Pro dell'esperienza</label>
             <textarea
@@ -119,19 +146,6 @@ export default function Form() {
                 value={post.cons}
                 onChange={handleChange}
             ></textarea>
-
-            <label className="font-bold self-start">Sforzo fisico dell'esperienza</label>
-            <input
-                required
-                className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
-                type="number"
-                min={1}
-                max={5}
-                placeholder="Sforzo fisico da 1 a 5"
-                name="effort"
-                value={post.effort}
-                onChange={handleChange}
-            />
 
             <button type="submit" className="bg-(--street) text-white py-1.5 px-2 w-full sm:w-50 rounded-full shadow cursor-pointer">Aggiungi</button>
         </form>
