@@ -33,22 +33,6 @@ export default function PostDetails() {
                     <Loader />
                 ) : (
                     <>
-                        <div className="flex justify-end gap-3 pt-3">
-                            {/* <button
-                                className="bg-(--street) text-(--white) py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer"
-                            onClick={() => setShowModal(true)}
-                            >
-                                <i className="fa-solid fa-pen"></i>
-                            </button> */}
-
-                            <button
-                                className="bg-red-900 text-(--white) py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer"
-                                onClick={() => setShowModal(true)}
-                            >
-                                <i className="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-
                         {showModal &&
                             <ConfirmModal />
                         }
@@ -63,6 +47,22 @@ export default function PostDetails() {
                                     className="w-full h-100 object-cover rounded shadow my-3"
                                 />
                             )}
+
+                            <div className="flex justify-end gap-3">
+                                {/* <button
+                                className="bg-(--street) text-(--white) py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer"
+                            onClick={() => setShowModal(true)}
+                            >
+                                <i className="fa-solid fa-pen"></i>
+                            </button> */}
+
+                                <button
+                                    className="bg-red-900 text-(--white) py-1.5 px-2 w-10 h-10 rounded-full shadow cursor-pointer"
+                                    onClick={() => setShowModal(true)}
+                                >
+                                    <i className="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
 
                             <h2 className="font-bold text-center text-xl">Info sull'esperienza</h2>
 

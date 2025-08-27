@@ -7,7 +7,7 @@ export default function Form() {
         <form
             className="flex flex-col justify-between items-center gap-3 bg-(--peach) p-5 rounded-3xl shadow shadow-gray-400 mx-auto sm:w-3/4"
             onSubmit={createPost}>
-            <label className="font-bold self-start">Tipo di attività</label>
+            <label className="font-bold self-start">Nome attività</label>
             <input
                 required
                 className=" w-full rounded py-1.5 px-2 shadow bg-(--white) mb-2"
@@ -61,6 +61,7 @@ export default function Form() {
                 required
                 className=" w-full rounded py-1.5 px-2 shadow bg-(--white) mb-2"
                 type="number"
+                min={0}
                 step={0.01}
                 placeholder="es. 9.99"
                 name="cost"
@@ -68,7 +69,7 @@ export default function Form() {
                 onChange={handleChange}
             />
 
-            <label className="font-bold self-start">Aggiungi una foto</label>
+            <label className="font-bold self-start">Foto</label>
             <input
                 type="file"
                 name="image"
@@ -90,7 +91,7 @@ export default function Form() {
 
             <div className="flex justify-between w-full gap-5">
                 <div className="flex flex-col w-1/2 gap-3">
-                    <label className="font-bold self-start">Mood dell'esperienza</label>
+                    <label className="font-bold self-start">Mood</label>
                     <select
                         required
                         className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
@@ -108,7 +109,7 @@ export default function Form() {
                 </div>
 
                 <div className="flex flex-col w-1/2 gap-3">
-                    <label className="font-bold self-start">Sforzo fisico dell'esperienza</label>
+                    <label className="font-bold self-start">Sforzo fisico</label>
                     <input
                         required
                         className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
@@ -125,7 +126,7 @@ export default function Form() {
 
 
 
-            <label className="font-bold self-start">Pro dell'esperienza</label>
+            <label className="font-bold self-start">Pro</label>
             <textarea
                 required
                 className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"
@@ -136,7 +137,7 @@ export default function Form() {
                 onChange={handleChange}
             ></textarea>
 
-            <label className="font-bold self-start">Contro dell'esperienza</label>
+            <label className="font-bold self-start">Contro</label>
             <textarea
                 required
                 className=" w-full rounded py-1.5 px-2 shadow bg-white mb-2"

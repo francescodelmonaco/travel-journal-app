@@ -24,6 +24,7 @@ export default function ConfirmModal() {
                         className="bg-red-900 text-(--white) font-bold px-3 py-1.5 rounded-full shadow w-full cursor-pointer"
                         onClick={() => {
                             removePost(id);
+                            setShowModal(false);
                             navigate("/")
                         }}
                     >

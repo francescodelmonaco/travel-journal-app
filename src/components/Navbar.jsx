@@ -40,9 +40,9 @@ export default function Navbar() {
             </Link>
 
             <button
-                className="bg-(--street) text-white h-10 px-5 rounded-full shadow cursor-pointer self-center"
+                className="bg-(--street) text-white h-10 w-10 rounded-full shadow cursor-pointer self-center"
                 onClick={signOut}
-            >Log out <i className="fa-solid fa-right-from-bracket"></i></button>
+            ><i className="fa-solid fa-right-from-bracket"></i></button>
         </div>
     )
 }
