@@ -36,7 +36,7 @@ Ogni tappa del diario include:
 - 🎨 **Tailwind CSS + custom CSS:** per uno styling veloce, modulare e responsive.
 
 ### Backend
-- 🗄️ **Supabase:** soluzione completa e serverless per database e storage. La scelta è stata fatta per sperimentare nuove tecnologie.
+- 🗄️ **Supabase:** soluzione completa e serverless per database ed autenticazione. La scelta è stata fatta per sperimentare nuove tecnologie.
 
 ## 🔗 Deployment
 
